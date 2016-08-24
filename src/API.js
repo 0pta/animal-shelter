@@ -1,9 +1,11 @@
 import ServerActions from './actions/ServerActions';
-import parser from 'json-parser';
+import axios from 'axios';
 
 const API = {
   getAnimals() {
-
+    axios.get('/api/animals')
+      .then(res => ServerActions.receiveAnimals(res.data))
+      .catch(console.error);
   }
 }
 

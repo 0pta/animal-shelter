@@ -74,11 +74,20 @@ router.put('/:animalId/addOwner/:ownerId', (req, res) => {
 })
 
 router.delete('/:animalId', (req, res) => {
-  Animal.findByIdAndRemove(req.params.animalId, (err, animalId) => {
-    if (err || !animalId) {
+  Animal.findByIdAndRemove(req.params.animalId, (err, animal) => {
+    if (err || !animal) {
       return res.status(400).send(err || 'Animal was not deleted.');
     }
-    res.send(animalId);
+    res.send(animal);
+  })
+})
+
+router.put('/:animalId', (req, res) => {
+  Animal.findByIdAndUpdate(req.params.animalId, {$set: req.body}, {new: true}, (err, animal) => {
+    if (err || !animal) {
+      return res.status(400).send(err || 'Animal was not updated.');
+    }
+    res.send(animal);
   })
 })
 

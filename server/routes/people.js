@@ -17,4 +17,22 @@ router.route('/')
     })
   });
 
+router.delete('/:personId', (req, res) => {
+  Person.findByIdAndRemove(req.params.personId, (err, person) => {
+    if (err || !person) {
+      return res.status(400).send(err || 'Person was not deleted.');
+    }
+    res.send(person);
+  })
+})
+
+router.put('/:personId', (req, res) => {
+  Person.findByIdAndUpdate(req.params.personId, {$set: req.body}, {new: true}, (err, person) => {
+    if (err || !person) {
+      return res.status(400).send(err || 'Person was not updated.');
+    }
+    res.send(person);
+  })
+})
+
 module.exports = router;
