@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import AnimalStore from '../stores/AnimalStore';
 import PersonStore from '../stores/PersonStore';
 import PersonActions from '../actions/PersonActions';
@@ -32,13 +33,14 @@ export default class App extends Component {
 
     if (this.state.animals) {
       const Animals = this.state.animals.map((value, index) => {
+        let path = value._id;
         return (
           <tr key={index}>
             <td>{value.type}</td>
             <td>{value.name}</td>
             <td>{value.age}</td>
             <td>{value.gender}</td>
-            <td><button className="btn btn-success btn-sm">Details</button></td>
+            <td><Link to={path}><button className="btn btn-success btn-sm">Details</button></Link></td>
           </tr>
         )
       })

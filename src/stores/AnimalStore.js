@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import AppDispatcher from '../AppDispatcher';
 
 let _animals = [];
+let _animal = {};
 
 class AnimalStore extends EventEmitter {
   constructor() {
@@ -11,6 +12,10 @@ class AnimalStore extends EventEmitter {
       switch(action.type) {
         case 'RECEIVE_ANIMALS':
         _animals = action.animals;
+        this.emit('CHANGE');
+        break;
+        case 'RECEIVE_ANIMAL':
+        _animal = action.animal;
         this.emit('CHANGE');
         break;
       }
@@ -27,6 +32,10 @@ class AnimalStore extends EventEmitter {
 
   getAnimals() {
     return _animals;
+  }
+
+  getAnimal() {
+    return _animal;
   }
 }
 

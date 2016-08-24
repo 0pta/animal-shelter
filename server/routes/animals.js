@@ -39,7 +39,7 @@ router.get('/:id', (req, res) => {
     }
 
     res.send(animal);
-  }).populate('currentOwner previousOwners')
+  }).populate('owner')
 
 //SAMSIES; just different syntax
 
