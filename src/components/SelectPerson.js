@@ -40,6 +40,7 @@ export default class SelectPerson extends Component {
   deletePerson(e) {
     e.preventDefault();
     PersonActions.deletePerson(e.target.getAttribute('data-id'));
+    this.props.removePerson();
   }
 
   render() {
@@ -51,7 +52,6 @@ export default class SelectPerson extends Component {
       })
       let Person;
       if (this.props.person) {
-        let addPath = '/addPerson/' + this.props.person._id;
         Person = (
           <div>
             <h5>{this.props.person.name}</h5>

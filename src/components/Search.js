@@ -19,6 +19,7 @@ export default class App extends Component {
 
     this._onChange = this._onChange.bind(this);
     this._setPerson = this._setPerson.bind(this);
+    this._removePerson = this._removePerson.bind(this);
     this._adopt = this._adopt.bind(this);
   }
 
@@ -45,11 +46,13 @@ export default class App extends Component {
   _setPerson(id) {
     PersonActions.getPerson(id);
     this.setState({person: PersonStore.getPerson()});
-    console.log ('this.state.person:', this.state.person);
+  }
+
+  _removePerson() {
+    this.setState({person: null});
   }
 
   _adopt(e) {
-    console.log ('hi:', hi);
     // console.log ('e.target:', e.target.getAttribute('id'));
   }
 
@@ -119,7 +122,7 @@ export default class App extends Component {
               <AddAnimal/>
             </div>
             <div className="col-sm-3 col-md-3 col-lg-3">
-              <SelectPerson people={this.state.people} person={this.state.person} setPerson={this._setPerson}/>
+              <SelectPerson people={this.state.people} person={this.state.person} setPerson={this._setPerson} removePerson={this._removePerson}/>
             </div>
           </div>
           <table className="table table-striped">

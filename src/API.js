@@ -39,7 +39,7 @@ const API = {
   },
   deletePerson(id) {
     axios.delete(`/api/people/${id}`)
-      .then(res => ServerActions.receivePeople(res.data))
+      .then(res => ServerActions.deletePerson(res.data))
       .catch(console.error);
   },
   addOwner(animalId, personId) {

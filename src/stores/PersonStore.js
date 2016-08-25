@@ -19,7 +19,14 @@ class PersonStore extends EventEmitter {
           this.emit('CHANGE');
           break;
         case 'CREATE_PERSON':
-          _people = _people.push(action.person);
+          _people.push(action.person);
+          this.emit('CHANGE');
+          break;
+        case 'DELETE_PERSON':
+          let _newPeople = _people.filter(function(obj) {
+            return obj._id !== action.person._id;
+          })
+          _people = _newPeople;
           this.emit('CHANGE');
           break;
       }

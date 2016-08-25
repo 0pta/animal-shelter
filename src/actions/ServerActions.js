@@ -42,6 +42,12 @@ const ServerActions = {
       type: 'CREATE_PERSON',
       person
     })
+  },
+  deletePerson(person) {
+    AppDispatcher.dispatch({
+      type: 'DELETE_PERSON',
+      person
+    })
   }
 }
 
