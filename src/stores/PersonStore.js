@@ -18,6 +18,10 @@ class PersonStore extends EventEmitter {
           _person = action.person;
           this.emit('CHANGE');
           break;
+        case 'CREATE_PERSON':
+          _people = _people.push(action.person);
+          this.emit('CHANGE');
+          break;
       }
     });
   }

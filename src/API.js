@@ -32,6 +32,11 @@ const API = {
       .then(res => ServerActions.receivePerson(res.data))
       .catch(console.error);
   },
+  createPerson(obj) {
+    axios.post('/api/people', obj)
+      .then(res => ServerActions.createPerson(res.data))
+      .catch(console.error);
+  },
   deletePerson(id) {
     axios.delete(`/api/people/${id}`)
       .then(res => ServerActions.receivePeople(res.data))

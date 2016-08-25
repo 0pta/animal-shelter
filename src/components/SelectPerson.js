@@ -4,6 +4,7 @@ import AnimalStore from '../stores/AnimalStore';
 import PersonStore from '../stores/PersonStore';
 import PersonActions from '../actions/PersonActions';
 import { browserHistory } from 'react-router';
+import AddPerson from './AddPerson';
 
 export default class SelectPerson extends Component {
   constructor(props) {
@@ -55,13 +56,14 @@ export default class SelectPerson extends Component {
           <div>
             <h5>{this.props.person.name}</h5>
             <button onClick={this.deletePerson} data-id={this.props.person._id} className="btn btn-danger btn-xs">X</button>
+            <AddPerson />
           </div>
         )
       } else {
         Person = (
           <div>
             <h5>Select Adopter</h5>
-            <button>Add Person</button>
+            <AddPerson />
           </div>
         )
       }

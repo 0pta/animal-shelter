@@ -36,6 +36,12 @@ const ServerActions = {
       type: 'RECEIVE_PERSON',
       person
     })
+  },
+  createPerson(person) {
+    AppDispatcher.dispatch({
+      type: 'CREATE_PERSON',
+      person
+    })
   }
 }
 

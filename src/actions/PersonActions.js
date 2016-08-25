@@ -19,6 +19,9 @@ const PersonActions = {
   getPerson(id) {
     API.getPerson(id);
   },
+  createPerson(obj) {
+    API.createPerson(obj);
+  },
   deletePerson(id) {
     API.deletePerson(id);
   },
