@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import AppDispatcher from '../AppDispatcher';
 
 let _people;
+let _person;
 
 class PersonStore extends EventEmitter {
   constructor() {
@@ -10,9 +11,13 @@ class PersonStore extends EventEmitter {
     AppDispatcher.register(action => {
       switch(action.type) {
         case 'RECEIVE_PEOPLE':
-        _people = action.people;
-        this.emit('CHANGE');
-        break;
+          _people = action.people;
+          this.emit('CHANGE');
+          break;
+        case 'RECEIVE_PERSON':
+          _person = action.person;
+          this.emit('CHANGE');
+          break;
       }
     });
   }
@@ -26,8 +31,11 @@ class PersonStore extends EventEmitter {
   }
 
   getPeople() {
-    console.log ('_people:', _people);
     return _people;
+  }
+
+  getPerson() {
+    return _person;
   }
 }
 

@@ -30,6 +30,12 @@ const ServerActions = {
       type: 'RECEIVE_PEOPLE',
       people
     })
+  },
+  receivePerson(person) {
+    AppDispatcher.dispatch({
+      type: 'RECEIVE_PERSON',
+      person
+    })
   }
 }
 

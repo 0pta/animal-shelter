@@ -13,10 +13,12 @@ export default class App extends Component {
 
     this.state = {
       animals: null,
-      people: null
+      people: null,
+      person: null
     }
 
     this._onChange = this._onChange.bind(this);
+    this._setPerson = this._setPerson.bind(this);
   }
 
   componentDidMount() {
@@ -34,12 +36,17 @@ export default class App extends Component {
   _onChange() {
     this.setState({
       animals: AnimalStore.getAnimals(),
-      people: PersonStore.getPeople()
+      people: PersonStore.getPeople(),
+      person: PersonStore.getPerson()
     });
   }
 
-  render() {
+  _setPerson(id) {
+    PersonActions.getPerson(id);
+    this.setState({person: PersonStore.getPerson()});
+  }
 
+  render() {
     if (this.state.animals) {
       const Animals = this.state.animals.map((value, index) => {
         let path = value._id;
@@ -104,7 +111,7 @@ export default class App extends Component {
               <AddAnimal/>
             </div>
             <div className="col-sm-3 col-md-3 col-lg-3">
-              <SelectPerson people={this.state.people}/>
+              <SelectPerson people={this.state.people} person={this.state.person} setPerson={this._setPerson}/>
             </div>
           </div>
           <table className="table table-striped">

@@ -16,6 +16,9 @@ const PersonActions = {
   getPeople() {
     API.getPeople();
   },
+  getPerson(id) {
+    API.getPerson(id);
+  },
   addOwner(animalId, personId) {
     API.addOwner(animalId, personId);
   }
