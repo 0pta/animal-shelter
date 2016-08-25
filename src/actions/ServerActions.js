@@ -13,6 +13,18 @@ const ServerActions = {
       animal
     })
   },
+  addAnimal(animal) {
+    AppDispatcher.dispatch({
+      type: 'ADD_ANIMAL',
+      animal
+    })
+  },
+  removeAnimal(animal) {
+    AppDispatcher.dispatch({
+      type: 'REMOVE_ANIMAL',
+      animal
+    })
+  },
   receivePeople(people) {
     AppDispatcher.dispatch({
       type: 'RECEIVE_PEOPLE',

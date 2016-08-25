@@ -7,6 +7,12 @@ const PersonActions = {
   getAnimal(id) {
     API.getAnimal(id);
   },
+  addAnimal(animalObj) {
+    API.addAnimal(animalObj);
+  },
+  removeAnimal(id) {
+    API.removeAnimal(id);
+  },
   getPeople() {
     API.getPeople();
   },

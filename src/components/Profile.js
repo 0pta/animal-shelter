@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { Modal, Button } from 'react-bootstrap';
 import AnimalStore from '../stores/AnimalStore';
 import PersonStore from '../stores/PersonStore';
 import PersonActions from '../actions/PersonActions';
+import { browserHistory } from 'react-router';
 
 export default class App extends Component {
   constructor(props) {
@@ -15,12 +17,20 @@ export default class App extends Component {
       draftOwner: ""
     }
 
-    this._onChange = this._onChange.bind(this);
+    //this._onChange = this._onChange.bind(this);
     this._addOwner = this._addOwner.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
     this._onInputChange = this._onInputChange.bind(this);
     this._selectOwner = this._selectOwner.bind(this);
+    this._removeAnimal = this._removeAnimal.bind(this);
+
+    this._onChange = () => {
+        this.setState({
+          animal: AnimalStore.getAnimal(this.props.params.animalId),
+          people: PersonStore.getPeople()
+        })
+    }
   }
 
   componentDidMount() {
@@ -33,12 +43,11 @@ export default class App extends Component {
     PersonStore.stopListening(this._onChange);
   }
 
-  _onChange() {
-    this.setState({
-      animal: AnimalStore.getAnimal(),
-      people: PersonStore.getPeople()
-    })
-  }
+  // componentWillMount() {
+  //   this.setState({animal: AnimalStore.getAnimal(this.props.params.animalId)});
+  // }
+
+
 
   _addOwner(e) {
     e.preventDefault();
@@ -65,6 +74,16 @@ export default class App extends Component {
     this.setState({draftOwner: e.target.getAttribute('data-id')});
   }
 
+  //componentWillReceiveProps(nextProps) {
+  // ClientActions.getPets(nextProps.params.type)
+  //}
+
+  _removeAnimal(e) {
+    e.preventDefault();
+    PersonActions.removeAnimal(this.props.params.animalId);
+    browserHistory.push('/');
+  }
+
   render() {
     if (this.state.animal) {
       if (this.state.people) {
@@ -81,14 +100,19 @@ export default class App extends Component {
           Owner = <h5>Not adopted yet. Please adopt!</h5>
         }
 
+        let path = '/';
+
         return (
           <div className="container">
+            <Link to={path}><button className="btn btn-primary btn-sm">Search</button></Link>
             <h3>Animal Details</h3>
+            <img src={this.state.animal.picture} width="400px" />
             <h5>Name: {this.state.animal.name}</h5>
             <h5>Type: {this.state.animal.type}</h5>
             <h5>Age: {this.state.animal.age}</h5>
             <h5>Gender: {this.state.animal.gender}</h5>
             {Owner}
+            <div><button onClick={this._removeAnimal} className="btn btn-danger btn-sm">Remove from Listing</button></div>
             <button onClick={this._openModal} className="btn btn-default btn-sm">Adopt</button>
 
             <Modal show={this.state.showModal} onHide={this._closeModal}>

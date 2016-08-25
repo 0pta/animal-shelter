@@ -11,13 +11,21 @@ class AnimalStore extends EventEmitter {
     AppDispatcher.register(action => {
       switch(action.type) {
         case 'RECEIVE_ANIMALS':
-        _animals = action.animals;
-        this.emit('CHANGE');
-        break;
+          _animals = action.animals;
+          this.emit('CHANGE');
+          break;
         case 'RECEIVE_ANIMAL':
-        _animal = action.animal;
-        this.emit('CHANGE');
-        break;
+          _animal = action.animal;
+          this.emit('CHANGE');
+          break;
+        case 'ADD_ANIMAL':
+          _animals.push(action.animal);
+          this.emit('CHANGE');
+          break;
+        case 'REMOVE_ANIMAL':
+          _animal = {};
+          this.emit('CHANGE');
+          break;
       }
     });
   }
@@ -27,7 +35,7 @@ class AnimalStore extends EventEmitter {
   }
 
   stopListening(cb) {
-    this.on('CHANGE', cb);
+    this.removeListener('CHANGE', cb);
   }
 
   getAnimals() {

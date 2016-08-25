@@ -5,6 +5,7 @@ const animalSchema = new mongoose.Schema({
   type: {type: String, required: true},
   age: {type: Number, required: true, min: 0},
   gender: {type: String, required: true, default: "female"},
+  picture: {type: String},
   owner: {type: mongoose.Schema.Types.ObjectId, ref: 'Person'}
 });
 

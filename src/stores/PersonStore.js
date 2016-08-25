@@ -22,7 +22,7 @@ class PersonStore extends EventEmitter {
   }
 
   stopListening(cb) {
-    this.on('CHANGE', cb);
+    this.removeListener('CHANGE', cb);
   }
 
   getPeople() {

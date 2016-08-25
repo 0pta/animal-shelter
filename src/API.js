@@ -12,6 +12,16 @@ const API = {
       .then(res => ServerActions.receiveAnimal(res.data))
       .catch(console.error);
   },
+  addAnimal(animalObj) {
+    axios.post(`/api/animals`, animalObj)
+      .then(res => ServerActions.addAnimal(res.data))
+      .catch(console.error);
+  },
+  removeAnimal(id) {
+    axios.delete(`/api/animals/${id}`)
+      .then(res => ServerActions.removeAnimal(res.data))
+      .catch(console.error);
+  },
   getPeople() {
     axios.get('/api/people')
       .then(res => ServerActions.receivePeople(res.data))
