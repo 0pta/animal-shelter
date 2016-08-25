@@ -53,6 +53,7 @@ export default class App extends Component {
   }
 
   _adopt(e) {
+    console.log ('hi');
     // console.log ('e.target:', e.target.getAttribute('id'));
   }
 
@@ -64,7 +65,7 @@ export default class App extends Component {
         if (value.owner) {
           Owned = <td>Adopted</td>
         } else {
-          Owned = <td>ADOPT ME!!!</td>
+          Owned = <td>ADOPT ME PLEASE!!!</td>
           //Owned = <td><button data-id={value._id} className="btn btn-primary btn-sm" onClick={this._adopt}>Adopt</button></td>
         }
         return (
