@@ -17,14 +17,14 @@ router.route('/')
     })
   });
 
-router.get('/:personId'), (req, res) => {
-  Person.findById(req.params.id, (err, person) => {
+router.get('/:personId', (req, res) => {
+  Person.findById(req.params.personId, (err, person) => {
     if (err || !person) {
       return res.status(400).send(err || 'Person was not found.');
     }
     res.send(person);
   })
-}
+})
 
 router.delete('/:personId', (req, res) => {
   Person.findByIdAndRemove(req.params.personId, (err, person) => {

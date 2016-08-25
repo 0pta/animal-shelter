@@ -19,6 +19,7 @@ export default class App extends Component {
 
     this._onChange = this._onChange.bind(this);
     this._setPerson = this._setPerson.bind(this);
+    this._adopt = this._adopt.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +47,11 @@ export default class App extends Component {
     this.setState({person: PersonStore.getPerson()});
   }
 
+  _adopt(e) {
+    console.log ('hi:', hi);
+    // console.log ('e.target:', e.target.getAttribute('id'));
+  }
+
   render() {
     if (this.state.animals) {
       const Animals = this.state.animals.map((value, index) => {
@@ -54,7 +60,8 @@ export default class App extends Component {
         if (value.owner) {
           Owned = <td>Adopted</td>
         } else {
-          Owned = <td><button className="btn btn-primary btn-sm">Adopt</button></td>
+          Owned = <td>ADOPT ME!!!</td>
+          //Owned = <td><button data-id={value._id} className="btn btn-primary btn-sm" onClick={this._adopt}>Adopt</button></td>
         }
         return (
           <tr key={index}>

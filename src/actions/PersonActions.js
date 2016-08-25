@@ -21,6 +21,9 @@ const PersonActions = {
   },
   addOwner(animalId, personId) {
     API.addOwner(animalId, personId);
+  },
+  removeOwner(id) {
+    API.removeOwner(id);
   }
 }
 

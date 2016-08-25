@@ -56,6 +56,21 @@ router.get('/:id', (req, res) => {
 
 })
 
+router.put('/:animalId/removeOwner', (req, res) => {
+  Animal.findById(req.params.animalId, (err, animal) => {
+    if (err || !animal) {
+      return res.status(400).send(err || 'Animal not found.');
+    }
+
+    animal.owner = null;
+
+    // need to save or doesn't go to database at all
+    animal.save((err, savedAnimal) => {
+      res.status(err ? 400: 200).send(err || savedAnimal);
+    });
+  });
+})
+
 router.put('/:animalId/addOwner/:ownerId', (req, res) => {
   Animal.findById(req.params.animalId, (err, animal) => {
     if (err || !animal) {

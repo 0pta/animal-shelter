@@ -29,13 +29,16 @@ const API = {
   },
   getPerson(id) {
     axios.get(`/api/people/${id}`)
-      .then(res => {
-        console.log ('res:', res.data);
-      })//ServerActions.receivePerson(res.data))
+      .then(res => ServerActions.receivePerson(res.data))
       .catch(console.error);
   },
   addOwner(animalId, personId) {
     axios.put(`/api/animals/${animalId}/addOwner/${personId}`)
+      .then(res => ServerActions.receiveAnimal(res.data))
+      .catch(console.error);
+  },
+  removeOwner(animalId) {
+    axios.put(`/api/animals/${animalId}/removeOwner`)
       .then(res => ServerActions.receiveAnimal(res.data))
       .catch(console.error);
   }

@@ -24,6 +24,7 @@ export default class App extends Component {
     this._onInputChange = this._onInputChange.bind(this);
     this._selectOwner = this._selectOwner.bind(this);
     this._removeAnimal = this._removeAnimal.bind(this);
+    this._disassociate = this._disassociate.bind(this);
 
     this._onChange = () => {
         this.setState({
@@ -71,7 +72,10 @@ export default class App extends Component {
 
   _selectOwner(e) {
     e.preventDefault();
-    this.setState({draftOwner: e.target.getAttribute('data-id')});
+    //this.setState({draftOwner: e.target.getAttribute('data-id')});
+    PersonActions.addOwner(this.props.params.animalId, e.target.getAttribute('data-id'));
+    this.setState({showModal: false, animal: PersonActions.getAnimal(this.props.params.animalId)});
+    browserHistory.push('/');
   }
 
   //componentWillReceiveProps(nextProps) {
@@ -81,6 +85,13 @@ export default class App extends Component {
   _removeAnimal(e) {
     e.preventDefault();
     PersonActions.removeAnimal(this.props.params.animalId);
+    browserHistory.push('/');
+  }
+
+  _disassociate(e) {
+    e.preventDefault();
+    PersonActions.removeOwner(this.props.params.animalId);
+    this.setState({draftOwner: null})
     browserHistory.push('/');
   }
 
@@ -114,6 +125,7 @@ export default class App extends Component {
             {Owner}
             <div><button onClick={this._removeAnimal} className="btn btn-danger btn-sm">Remove from Listing</button></div>
             <button onClick={this._openModal} className="btn btn-default btn-sm">Adopt</button>
+            <button onClick={this._disassociate} className="btn btn-default btn-sm">Unadopt</button>
 
             <Modal show={this.state.showModal} onHide={this._closeModal}>
               <Modal.Header closeButton>
