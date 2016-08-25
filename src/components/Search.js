@@ -45,6 +45,7 @@ export default class App extends Component {
   _setPerson(id) {
     PersonActions.getPerson(id);
     this.setState({person: PersonStore.getPerson()});
+    console.log ('this.state.person:', this.state.person);
   }
 
   _adopt(e) {

@@ -2,16 +2,26 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+  debug: true,
+  devtool: 'cheap-module-eval-source-map',
   entry: [
+    'webpack-hot-middleware/client?reload=true',
     'bootstrap-loader',
     './src/index'
   ],
+  target: 'web',
   output: {
     path: path.join(__dirname, '/build'),
     publicPath: '/',
     filename: 'bundle.js'
   },
-  plugins: [],
+  devServer: {
+    contentBase: './src'
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
   module: {
     loaders: [
       {

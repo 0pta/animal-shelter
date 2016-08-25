@@ -32,6 +32,11 @@ const API = {
       .then(res => ServerActions.receivePerson(res.data))
       .catch(console.error);
   },
+  deletePerson(id) {
+    axios.delete(`/api/people/${id}`)
+      .then(res => ServerActions.receivePeople(res.data))
+      .catch(console.error);
+  },
   addOwner(animalId, personId) {
     axios.put(`/api/animals/${animalId}/addOwner/${personId}`)
       .then(res => ServerActions.receiveAnimal(res.data))

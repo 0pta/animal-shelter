@@ -11,22 +11,22 @@ export default class SelectPerson extends Component {
 
     // this._onChange = this._onChange.bind(this);
     this.setPerson = this.setPerson.bind(this);
+    this.deletePerson = this.deletePerson.bind(this);
   }
 
   // componentDidMount() {
   //   // PersonActions.getPeople();
   //   // PersonStore.on('CHANGE', this._onChange);
-  //   // PersonStore.startListening(this._onChange);
+  //   PersonStore.startListening(this._onChange);
   //   AnimalStore.startListening(this._onChange);
   // }
   //
   // componentWillUnmount() {
-  //   // PersonStore.stopListening(this._onChange);
+  //   PersonStore.stopListening(this._onChange);
   //   AnimalStore.stopListening(this._onChange);
   // }
-  //
+  // //
   // _onChange() {
-  //   console.log ('PersonStore.getPeople():', PersonStore.getPeople())
   //   this.setState({people: PersonStore.getPeople()});
   // }
 
@@ -34,6 +34,11 @@ export default class SelectPerson extends Component {
     e.preventDefault();
     let personId = e.target.getAttribute('data-id');
     this.props.setPerson(personId);
+  }
+
+  deletePerson(e) {
+    e.preventDefault();
+    PersonActions.deletePerson(e.target.getAttribute('data-id'));
   }
 
   render() {
@@ -45,7 +50,16 @@ export default class SelectPerson extends Component {
       })
       let Person;
       if (this.props.person) {
-        Person = <h5>{this.props.person.name}</h5>
+        let addPath = '/addPerson/' + this.props.person._id;
+        let editPath = '/editPerson/' + this.props.person._id;
+        Person = (
+          <div>
+            <h5>{this.props.person.name}</h5>
+            <Link to={addPath}><button data-id={this.props.person._id} className="btn btn-success btn-xs">+</button></Link>
+            <Link to={editPath}><button data-id={this.props.person._id} className="btn btn-primary btn-xs">Edit</button></Link>
+            <button onClick={this.deletePerson} data-id={this.props.person._id} className="btn btn-danger btn-xs">X</button>
+          </div>
+        )
       } else {
         Person = <h5>Select Adopter</h5>
       }
