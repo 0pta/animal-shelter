@@ -5,14 +5,15 @@ import PersonStore from '../stores/PersonStore';
 import PersonActions from '../actions/PersonActions';
 
 import AddAnimal from './AddAnimal';
-import AddPerson from './AddPerson';
+import SelectPerson from './SelectPerson';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      animals: PersonActions.getAnimals()
+      animals: PersonActions.getAnimals(),
+      person: null
     }
 
     this._onChange = this._onChange.bind(this);
@@ -37,6 +38,12 @@ export default class App extends Component {
     if (this.state.animals) {
       const Animals = this.state.animals.map((value, index) => {
         let path = value._id;
+        let Owned;
+        if (value.owner) {
+          Owned = <td>Adopted</td>
+        } else {
+          Owned = <td><button className="btn btn-primary btn-sm">Adopt</button></td>
+        }
         return (
           <tr key={index}>
             <td>{value.type}</td>
@@ -45,6 +52,7 @@ export default class App extends Component {
             <td>{value.gender}</td>
             <td><img className="thumbnail" src={value.picture} width="200px" /></td>
             <td><Link to={path}><button className="btn btn-success btn-sm">Details</button></Link></td>
+            {Owned}
           </tr>
         )
       })
@@ -87,11 +95,11 @@ export default class App extends Component {
                 <li><a href="#">Adopted</a></li>
               </ul>
             </div>
-            <div className="col-sm-1 col-md-1 col-lg-1">
-              <AddAnimal />
+            <div className="col-sm-5 col-md-5 col-lg-5">
+              <AddAnimal/>
             </div>
-            <div className="col-sm-1 col-md-1 col-lg-1">
-              <AddPerson />
+            <div className="col-sm-3 col-md-3 col-lg-3">
+              <SelectPerson/>
             </div>
           </div>
           <table className="table table-striped">
@@ -103,6 +111,7 @@ export default class App extends Component {
                 <th>Gender</th>
                 <th>Picture</th>
                 <th>Details</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
