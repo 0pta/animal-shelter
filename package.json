@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node server/app.js",
     "postinstall": "webpack",
+    "build": "NODE_ENV='production' webpack",
+    "prod": "NODE_ENV='production' npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

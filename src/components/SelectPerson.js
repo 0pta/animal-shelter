@@ -51,17 +51,19 @@ export default class SelectPerson extends Component {
       let Person;
       if (this.props.person) {
         let addPath = '/addPerson/' + this.props.person._id;
-        let editPath = '/editPerson/' + this.props.person._id;
         Person = (
           <div>
             <h5>{this.props.person.name}</h5>
-            <Link to={addPath}><button data-id={this.props.person._id} className="btn btn-success btn-xs">+</button></Link>
-            <Link to={editPath}><button data-id={this.props.person._id} className="btn btn-primary btn-xs">Edit</button></Link>
             <button onClick={this.deletePerson} data-id={this.props.person._id} className="btn btn-danger btn-xs">X</button>
           </div>
         )
       } else {
-        Person = <h5>Select Adopter</h5>
+        Person = (
+          <div>
+            <h5>Select Adopter</h5>
+            <button>Add Person</button>
+          </div>
+        )
       }
       return (
         <div>
