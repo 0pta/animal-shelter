@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../AppDispatcher';
 
-let _people = [];
+let _people;
 
 class PersonStore extends EventEmitter {
   constructor() {
@@ -26,6 +26,7 @@ class PersonStore extends EventEmitter {
   }
 
   getPeople() {
+    console.log ('_people:', _people);
     return _people;
   }
 }

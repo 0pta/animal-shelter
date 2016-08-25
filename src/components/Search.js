@@ -12,14 +12,16 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      animals: PersonActions.getAnimals(),
-      person: null
+      animals: null,
+      people: null
     }
 
     this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
+    PersonActions.getAnimals();
+    PersonActions.getPeople();
     AnimalStore.startListening(this._onChange);
     PersonStore.startListening(this._onChange);
   }
@@ -30,7 +32,10 @@ export default class App extends Component {
   }
 
   _onChange() {
-    this.setState({animals: AnimalStore.getAnimals()});
+    this.setState({
+      animals: AnimalStore.getAnimals(),
+      people: PersonStore.getPeople()
+    });
   }
 
   render() {
@@ -99,7 +104,7 @@ export default class App extends Component {
               <AddAnimal/>
             </div>
             <div className="col-sm-3 col-md-3 col-lg-3">
-              <SelectPerson/>
+              <SelectPerson people={this.state.people}/>
             </div>
           </div>
           <table className="table table-striped">
